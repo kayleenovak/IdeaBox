@@ -1,0 +1,73 @@
+body {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr;
+  margin: 0;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-area {
+    background: #E5F3F2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+span {
+  color: #00A79D;
+}
+
+h1 {
+  color: #6D6E71;
+  font-size: 26px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+
+.title-input,
+  .idea-input,
+  .save-btn {
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+
+.save-btn {
+  padding: 5px;
+  color: white;
+  border: none;
+  background-color: #00A79D;
+}
+
+.delete-btn {
+    height: 22px;
+    width: 22px;
+    background: url(images/delete.svg);
+    background-repeat: no-repeat;
+}
+
+.search-bar {
+    align-content: center;
+    font-size: 16px;
+    margin: 15px;
+    width: 90%;
+}
+
+.idea {
+    display: inline-block;
+    margin: 0;
+    font-size: 20px;
+    color: #606E71;
+}
+
+
+
+
