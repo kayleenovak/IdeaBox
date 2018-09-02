@@ -2,13 +2,14 @@ body {
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 2fr;
+  grid-auto-rows: 1fr 2fr;
   margin: 0;
 }
 
 section {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .input-area {
@@ -18,13 +19,13 @@ section {
     align-items: center;
 }
 
-span {
-  color: #00A79D;
-}
-
 h1 {
   color: #6D6E71;
   font-size: 26px;
+}
+
+span {
+  color: #00A79D;
 }
 
 form {
@@ -34,8 +35,18 @@ form {
 }
 
 .title-input,
-  .idea-input,
-  .save-btn {
+.idea-input {
+  color: #939598;
+}
+
+.title-input::placeholder,
+.idea-input::placeholder {
+  color: #939598;
+}
+
+.title-input,
+.idea-input,
+.save-btn {
     margin-bottom: 15px;
     font-size: 16px;
   }
@@ -47,18 +58,34 @@ form {
   background-color: #00A79D;
 }
 
-.delete-btn {
-    height: 22px;
-    width: 22px;
-    background: url(images/delete.svg);
-    background-repeat: no-repeat;
+.new-idea-section {
+  align-items: center;
 }
 
+.new-idea-card {
+  align-items: center;
+}
+
+
 .search-bar {
-    align-content: center;
     font-size: 16px;
-    margin: 15px;
-    width: 90%;
+    margin: 15px 0;
+    width: 89%;
+    color: #939598;
+}
+
+.search-bar:placeholder {
+  color: #939598;
+}
+
+
+.new-idea {
+  width: 90%;
+}
+
+.idea-header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .idea {
@@ -68,6 +95,46 @@ form {
     color: #606E71;
 }
 
+.delete-btn {
+  height: 22px;
+  width: 22px;
+  background: url('images/delete.svg');
+  background-repeat: no-repeat;
+}
+
+.delete-btn:hover {
+  background: url('images/delete-hover.svg');
+  background-repeat: no-repeat;
+}
+
+p {
+  color: #939598;
+  margin: 12px 0;
+}
+
+.upvote-btn {
+  height: 22px;
+  width: 22px;
+  background: url('images/upvote.svg');
+  background-repeat: no-repeat;
+}
+
+.upvote-btn:hover {
+  background: url('images/upvote-hover.svg');
+  background-repeat: no-repeat;
+}
+
+.downvote-btn {
+  height: 22px;
+  width: 22px;
+  background: url('images/downvote.svg');
+  background-repeat: no-repeat;
+}
+
+.downvote-btn:hover {
+  background: url('images/downvote-hover.svg');
+  background-repeat: no-repeat;
+}
 
 
 
