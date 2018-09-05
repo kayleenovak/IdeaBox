@@ -95,6 +95,11 @@ form {
     color: #606E71;
 }
 
+<<<<<<< HEAD
+.quality {
+  display: inline;
+  margin-left: 5px;
+=======
 .delete-btn {
   height: 22px;
   width: 22px;
@@ -134,6 +139,7 @@ p {
 .downvote-btn:hover {
   background: url('images/downvote-hover.svg');
   background-repeat: no-repeat;
+>>>>>>> 3deb4fe588b28672f92be5816abfdda326675fd7
 }
 
 
