@@ -1,8 +1,12 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-auto-rows: 1fr 2fr;
+  grid-auto-rows: 250px 2fr;
   margin: 0;
 }
 
@@ -22,6 +26,9 @@ section {
 h1 {
   color: #6D6E71;
   font-size: 26px;
+  font-family: 'Roboto Slab';
+  font-weight: 700;
+  margin: 15px;
 }
 
 span {
@@ -34,14 +41,20 @@ form {
   width: 90%;
 }
 
+input,
+textarea {
+  padding: 4px;
+}
+
 .title-input,
 .idea-input {
   color: #939598;
+  border: 1px solid #D1D3D4;
 }
 
 .title-input::placeholder,
 .idea-input::placeholder {
-  color: #939598;
+  color: #D1D3D4;
 }
 
 .title-input,
@@ -51,10 +64,13 @@ form {
     font-size: 16px;
   }
 
+button {
+  border: none;
+}
+
 .save-btn {
   padding: 5px;
   color: white;
-  border: none;
   background-color: #00A79D;
 }
 
@@ -72,15 +88,19 @@ form {
     margin: 15px 0;
     width: 89%;
     color: #939598;
+    border: 1px solid #D1D3D4;
 }
 
-.search-bar:placeholder {
-  color: #939598;
+.search-bar::placeholder {
+  color: #D1D3D4;
 }
 
 
 .new-idea {
   width: 90%;
+  border-bottom: 2px solid #D1D3D4;
+  padding-bottom: 5px;
+  margin-top: 15px;
 }
 
 .idea-header {
@@ -95,11 +115,13 @@ form {
     color: #606E71;
 }
 
-<<<<<<< HEAD
+
 .quality {
   display: inline;
   margin-left: 5px;
-=======
+  color: #6D6E71;
+}
+
 .delete-btn {
   height: 22px;
   width: 22px;
@@ -122,6 +144,7 @@ p {
   width: 22px;
   background: url('images/upvote.svg');
   background-repeat: no-repeat;
+  margin-right: 5px;
 }
 
 .upvote-btn:hover {
@@ -134,13 +157,68 @@ p {
   width: 22px;
   background: url('images/downvote.svg');
   background-repeat: no-repeat;
+  margin-right: 5px;
 }
 
 .downvote-btn:hover {
   background: url('images/downvote-hover.svg');
   background-repeat: no-repeat;
->>>>>>> 3deb4fe588b28672f92be5816abfdda326675fd7
 }
 
+.quality-btn {
+  display: flex;
+  align-items: center;
+}
 
+@media screen and (min-width: 500px) {
+  
+  form,
+  .search-bar,
+  .new-idea-card {
+    width: 75%;
+    max-width: 460px;
+  }
+
+  .new-idea {
+  width: 100%;
+}
+}
+
+@media screen and (min-width: 560px) {
+  h1 {
+    font-size: 1.8em;
+  }
+}
+@media screen and (min-width: 700px) {
+
+  form,
+  .search-bar,
+  .new-idea-card {
+    width: 60%;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  body {
+    grid-auto-rows: 225px 2fr;
+  }
+  form,
+  .search-bar,
+  .new-idea-card {
+    width: 55%;
+    max-width: 550px;
+  }
+
+  h1 {
+    font-size: 3em;
+  }
+
+  textarea {
+    height: 28px;
+  }
+}
 
