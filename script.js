@@ -9,20 +9,16 @@ recallCards();
 
 function upvoteIdea(event) {
   var id = $(event.target).parent().attr('id');
-  if (event.target.classList.contains('upvote-btn') && $(event.target).siblings('.quality').text() === 'Quality: swill') {
-   $(event.target).siblings('.quality').text('Quality: plausible');
-   var retrieveIdea = localStorage.getItem(id);
-   var parsedIdea = JSON.parse(retrieveIdea);
+  var element = $(event.target).siblings('.quality');
+  var parsedIdea = JSON.parse(localStorage.getItem(id));
+  if (event.target.classList.contains('upvote-btn') && element.text() === 'Quality: swill') {
+   element.text('Quality: plausible');
    parsedIdea.quality = 'plausible';
-   var stringifiedIdea = JSON.stringify(parsedIdea);
-   localStorage.setItem(id, stringifiedIdea);
-  } else if (event.target.classList.contains('upvote-btn') && $(event.target).siblings('.quality').text() === 'Quality: plausible') {
-    $(event.target).siblings('.quality').text('Quality: genius');
-   var retrieveIdea = localStorage.getItem(id);
-   var parsedIdea = JSON.parse(retrieveIdea);
+   setIdea(id, parsedIdea)
+  } else if (event.target.classList.contains('upvote-btn') && element.text() === 'Quality: plausible') {
+    element.text('Quality: genius');
    parsedIdea.quality = 'genius';
-   var stringifiedIdea = JSON.stringify(parsedIdea);
-   localStorage.setItem(id, stringifiedIdea);
+   setIdea(id, parsedIdea)
   }
 
 }
@@ -30,14 +26,13 @@ function upvoteIdea(event) {
 function downvoteIdea() {
    var id = $(event.target).parent().attr('id');
    var element = $(event.target).siblings('.quality')
+   var parsedIdea = JSON.parse(localStorage.getItem(id));
   if (event.target.classList.contains('downvote-btn') && element.text() === 'Quality: genius') {
    element.text('Quality: plausible');
-   var parsedIdea = JSON.parse(localStorage.getItem(id));
    parsedIdea.quality = 'plausible';
    setIdea(id, parsedIdea);
   } else if (event.target.classList.contains('downvote-btn') && element.text() === 'Quality: plausible') {
-    element.text('Quality: swill');
-   var parsedIdea = JSON.parse(localStorage.getItem(id));
+   element.text('Quality: swill');
    parsedIdea.quality = 'swill';
    setIdea(id, parsedIdea);
   }
@@ -89,20 +84,20 @@ function NewIdea(title, body) {
   this.id = $.now();
   this.title = title;
   this.body = body;
-  this.quality = 'swill'
+  this.quality = 'swill';
 }
 
 function createIdea(title, body) {
   var newIdea = new NewIdea(title, body);
   var stringifiedIdea = JSON.stringify(newIdea);
   localStorage.setItem(newIdea.id, stringifiedIdea); 
-  return newIdea.id
+  return newIdea
+  
 };
 
 function recallCards() {
   for (var i = 0; i < localStorage.length; i++) {
-    var retrieveIdea = localStorage.getItem(localStorage.key(i));
-    var parsedIdea = JSON.parse(retrieveIdea);
+    var parsedIdea = JSON.parse(localStorage.getItem(localStorage.key(i)));
     var html = generateCard(parsedIdea.id, parsedIdea.title, parsedIdea.body, parsedIdea.quality);
     $('.new-idea-card').prepend(html);
   }
