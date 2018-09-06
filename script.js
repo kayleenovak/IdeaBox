@@ -8,15 +8,15 @@ $('.new-idea-section').on('click', downvoteIdea);
 recallCards();
 
 function upvoteIdea(event) {
-  var id = $(event.target).parent().attr('id');
+  var id = $(event.target).parent().parent().attr('id');
   var element = $(event.target).siblings('.quality');
   var parsedIdea = JSON.parse(localStorage.getItem(id));
-  if (event.target.classList.contains('upvote-btn') && element.text() === 'Quality: swill') {
-   element.text('Quality: plausible');
+  if (event.target.classList.contains('upvote-btn') && element.text() === 'quality: swill') {
+   element.text('quality: plausible');
    parsedIdea.quality = 'plausible';
    setIdea(id, parsedIdea)
-  } else if (event.target.classList.contains('upvote-btn') && element.text() === 'Quality: plausible') {
-    element.text('Quality: genius');
+  } else if (event.target.classList.contains('upvote-btn') && element.text() === 'quality: plausible') {
+    element.text('quality: genius');
    parsedIdea.quality = 'genius';
    setIdea(id, parsedIdea)
   }
@@ -24,20 +24,25 @@ function upvoteIdea(event) {
 }
 
 function downvoteIdea() {
-   var id = $(event.target).parent().attr('id');
+   var id = $(event.target).parent().parent().attr('id');
    var element = $(event.target).siblings('.quality')
    var parsedIdea = JSON.parse(localStorage.getItem(id));
-  if (event.target.classList.contains('downvote-btn') && element.text() === 'Quality: genius') {
-   element.text('Quality: plausible');
+  if (event.target.classList.contains('downvote-btn') && element.text() === 'quality: genius') {
+   element.text('quality: plausible');
    parsedIdea.quality = 'plausible';
    setIdea(id, parsedIdea);
-  } else if (event.target.classList.contains('downvote-btn') && element.text() === 'Quality: plausible') {
-   element.text('Quality: swill');
+  } else if (event.target.classList.contains('downvote-btn') && element.text() === 'quality: plausible') {
+   element.text('quality: swill');
    parsedIdea.quality = 'swill';
    setIdea(id, parsedIdea);
   }
-
 }
+
+// $('.idea').on('click', editIdea);
+// function editIdea(event) {
+//   var changeTitle = document.querySelector('.idea').value;
+//   console.log(changeTitle);
+// }
 
 function setIdea(id, parsedIdea) {
   localStorage.setItem(id, JSON.stringify(parsedIdea))
@@ -46,13 +51,15 @@ function setIdea(id, parsedIdea) {
 function generateCard(id, title, body, quality) {
   return `<article class="new-idea" id="${id}">
             <article class="idea-header">
-              <h2 class="idea">${title}</h2>
+              <h2 class="idea" contenteditable="true">${title}</h2>
               <button class="delete-btn"></button>
             </article>
-            <p>${body}</p>
+            <p contenteditable="true">${body}</p>
+            <div class="quality-btn">
             <button class="upvote-btn"></button>
             <button class="downvote-btn"></button>
-            <p class="quality">Quality: ${quality}</p>
+            <p class="quality">quality: ${quality}</p>
+            </div>
           </article>`;
 }
 
