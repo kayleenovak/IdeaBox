@@ -43,6 +43,7 @@ function createCard(event) {
   clearInputs();
 }
 
+
 function generateCard(id, title, body, quality) {
   return `<article class="new-idea" id="${id}">
             <article class="idea-header">
@@ -68,11 +69,11 @@ function upvoteIdea(event) {
   var id = $(event.target).parent().parent().attr('id');
   var element = $(event.target).siblings('.quality');
   var parsedIdea = JSON.parse(localStorage.getItem(id));
-  if (event.target.classList.contains('upvote-btn') && element.text() === 'quality: swill') {
+  if ($(event.target).hasClass('upvote-btn') && element.text() === 'quality: swill') {
    element.text('quality: plausible');
    parsedIdea.quality = 'plausible';
    setIdea(id, parsedIdea)
-  } else if (event.target.classList.contains('upvote-btn') && element.text() === 'quality: plausible') {
+  } else if ($(event.target).hasClass('upvote-btn') && element.text() === 'quality: plausible') {
     element.text('quality: genius');
    parsedIdea.quality = 'genius';
    setIdea(id, parsedIdea)
@@ -83,19 +84,28 @@ function downvoteIdea() {
    var id = $(event.target).parent().parent().attr('id');
    var element = $(event.target).siblings('.quality')
    var parsedIdea = JSON.parse(localStorage.getItem(id));
-  if (event.target.classList.contains('downvote-btn') && element.text() === 'quality: genius') {
+  if ($(event.target).hasClass('downvote-btn') && element.text() === 'quality: genius') {
    element.text('quality: plausible');
    parsedIdea.quality = 'plausible';
    setIdea(id, parsedIdea);
-  } else if (event.target.classList.contains('downvote-btn') && element.text() === 'quality: plausible') {
+  } else if ($(event.target).hasClass('downvote-btn') && element.text() === 'quality: plausible') {
    element.text('quality: swill');
    parsedIdea.quality = 'swill';
    setIdea(id, parsedIdea);
   }
 }
 
-$('.idea').on('focusout', editIdea);
-$('.idea').on('keydown', function (event) {
+  $('.body').on('focusout', editBody);
+  $('.body').on('keydown', function (event) {
+  if (event.keyCode == 13) {
+    event.preventDefault();
+    editBody(event);
+    $('.body').trigger('blur');
+  }
+});
+
+  $('.idea').on('focusout', editIdea);
+  $('.idea').on('keydown', function (event) {
   if (event.keyCode == 13) {
     event.preventDefault();
     editIdea(event);
@@ -112,14 +122,6 @@ function editIdea(event) {
   setIdea(id, parsedIdea);
 }
 
-$('.body').on('focusout', editBody);
-$('.body').on('keydown', function (event) {
-  if (event.keyCode == 13) {
-    event.preventDefault();
-    editBody(event);
-    $('.body').trigger('blur');
-  }
-});
 
 function editBody(event) {
   event.preventDefault();
@@ -131,12 +133,19 @@ function editBody(event) {
 }
 
 function deleteIdea(event) {
-  if (event.target.classList.contains('delete-btn')) {
+  if ($(event.target).hasClass('delete-btn')) {
     var id = $(event.target).parent().parent().attr('id');
     localStorage.removeItem(id);  
     $(event.target).parent().parent().remove();
   }
 }
+
+$(".search-bar").on("keyup", function() {
+  var searchValue = $(this).val().toLowerCase();
+  $(".new-idea").filter(function() {
+    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1)
+  });
+});
 
 function recallCards() {
   for (var i = 0; i < localStorage.length; i++) {
