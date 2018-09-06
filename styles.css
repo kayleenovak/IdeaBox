@@ -3,10 +3,10 @@
 }
 
 body {
-  height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: 250px 2fr;
+  height: 100vh;
   margin: 0;
 }
 
@@ -17,10 +17,10 @@ section {
 }
 
 .input-area {
-    background: #E5F3F2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  background: #E5F3F2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1 {

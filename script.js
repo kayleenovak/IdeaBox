@@ -38,11 +38,39 @@ function downvoteIdea() {
   }
 }
 
-// $('.idea').on('click', editIdea);
-// function editIdea(event) {
-//   var changeTitle = document.querySelector('.idea').value;
-//   console.log(changeTitle);
-// }
+$('.idea').on('focusout', editIdea);
+$('.idea').on('keydown', function (event) {
+  if (event.keyCode == 13) {
+    event.preventDefault();
+    editIdea(event);
+    $('.idea').trigger('blur');
+  }
+});
+function editIdea(event) {
+  var id = $(event.target).parent().parent().attr('id');
+  var parsedIdea = JSON.parse(localStorage.getItem(id));
+  var changeTitle = event.target.innerText;
+  parsedIdea.title = changeTitle;
+  setIdea(id, parsedIdea);
+}
+
+$('.body').on('focusout', editBody);
+$('.body').on('keydown', function (event) {
+  if (event.keyCode == 13) {
+    event.preventDefault();
+    editBody(event);
+    $('.body').trigger('blur');
+  }
+});
+
+
+function editBody(event) {
+  var id = $(event.target).parent().attr('id');
+  var parsedIdea = JSON.parse(localStorage.getItem(id));
+  var changeBody = event.target.innerText;
+  parsedIdea.body = changeBody;
+  setIdea(id, parsedIdea);
+}
 
 function setIdea(id, parsedIdea) {
   localStorage.setItem(id, JSON.stringify(parsedIdea))
@@ -54,7 +82,7 @@ function generateCard(id, title, body, quality) {
               <h2 class="idea" contenteditable="true">${title}</h2>
               <button class="delete-btn"></button>
             </article>
-            <p contenteditable="true">${body}</p>
+            <p class="body" contenteditable="true">${body}</p>
             <div class="quality-btn">
             <button class="upvote-btn"></button>
             <button class="downvote-btn"></button>
