@@ -10,17 +10,39 @@ body {
   margin: 0;
 }
 
-section {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+button {
+  border: none;
 }
 
-.input-area {
-  background: #E5F3F2;
+.delete-btn {
+  height: 22px;
+  width: 22px;
+  background: url('images/delete.svg');
+  background-repeat: no-repeat;
+}
+
+.delete-btn:hover {
+  background: url('images/delete-hover.svg');
+  background-repeat: no-repeat;
+}
+
+.downvote-btn {
+  height: 22px;
+  width: 22px;
+  background: url('images/downvote.svg');
+  background-repeat: no-repeat;
+  margin-right: 5px;
+}
+
+.downvote-btn:hover {
+  background: url('images/downvote-hover.svg');
+  background-repeat: no-repeat;
+}
+
+form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 90%;
 }
 
 h1 {
@@ -31,19 +53,88 @@ h1 {
   margin: 15px;
 }
 
-span {
-  color: #00A79D;
+.idea {
+    display: inline-block;
+    margin: 0;
+    font-size: 20px;
+    color: #606E71;
 }
 
-form {
+.idea-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-area {
+  background: #E5F3F2;
   display: flex;
   flex-direction: column;
-  width: 90%;
+  align-items: center;
 }
 
 input,
 textarea {
   padding: 4px;
+}
+
+.new-idea-section {
+  align-items: center;
+}
+
+.new-idea-card {
+  align-items: center;
+}
+
+
+.new-idea {
+  width: 90%;
+  border-bottom: 2px solid #D1D3D4;
+  padding-bottom: 5px;
+  margin-top: 15px;
+}
+
+p {
+  color: #939598;
+  margin: 12px 0;
+}
+
+.quality {
+  display: inline;
+  margin-left: 5px;
+  color: #6D6E71;
+}
+
+.quality-btn {
+  display: flex;
+  align-items: center;
+}
+
+.save-btn {
+  padding: 5px;
+  color: white;
+  background-color: #00A79D;
+}
+
+.search-bar {
+    font-size: 16px;
+    margin: 15px 0;
+    width: 90%;
+    color: #939598;
+    border: 1px solid #D1D3D4;
+}
+
+.search-bar::placeholder {
+  color: #D1D3D4;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+span {
+  color: #00A79D;
 }
 
 .title-input,
@@ -62,81 +153,6 @@ textarea {
 .save-btn {
     margin-bottom: 15px;
     font-size: 16px;
-  }
-
-button {
-  border: none;
-}
-
-.save-btn {
-  padding: 5px;
-  color: white;
-  background-color: #00A79D;
-}
-
-.new-idea-section {
-  align-items: center;
-}
-
-.new-idea-card {
-  align-items: center;
-}
-
-
-.search-bar {
-    font-size: 16px;
-    margin: 15px 0;
-    width: 89%;
-    color: #939598;
-    border: 1px solid #D1D3D4;
-}
-
-.search-bar::placeholder {
-  color: #D1D3D4;
-}
-
-
-.new-idea {
-  width: 90%;
-  border-bottom: 2px solid #D1D3D4;
-  padding-bottom: 5px;
-  margin-top: 15px;
-}
-
-.idea-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.idea {
-    display: inline-block;
-    margin: 0;
-    font-size: 20px;
-    color: #606E71;
-}
-
-
-.quality {
-  display: inline;
-  margin-left: 5px;
-  color: #6D6E71;
-}
-
-.delete-btn {
-  height: 22px;
-  width: 22px;
-  background: url('images/delete.svg');
-  background-repeat: no-repeat;
-}
-
-.delete-btn:hover {
-  background: url('images/delete-hover.svg');
-  background-repeat: no-repeat;
-}
-
-p {
-  color: #939598;
-  margin: 12px 0;
 }
 
 .upvote-btn {
@@ -152,23 +168,6 @@ p {
   background-repeat: no-repeat;
 }
 
-.downvote-btn {
-  height: 22px;
-  width: 22px;
-  background: url('images/downvote.svg');
-  background-repeat: no-repeat;
-  margin-right: 5px;
-}
-
-.downvote-btn:hover {
-  background: url('images/downvote-hover.svg');
-  background-repeat: no-repeat;
-}
-
-.quality-btn {
-  display: flex;
-  align-items: center;
-}
 
 @media screen and (min-width: 500px) {
   
@@ -181,14 +180,16 @@ p {
 
   .new-idea {
   width: 100%;
-}
+  }
 }
 
 @media screen and (min-width: 560px) {
+  
   h1 {
     font-size: 1.8em;
   }
 }
+
 @media screen and (min-width: 700px) {
 
   form,
@@ -203,9 +204,11 @@ p {
 }
 
 @media screen and (min-width: 1000px) {
+  
   body {
     grid-auto-rows: 225px 2fr;
   }
+
   form,
   .search-bar,
   .new-idea-card {
