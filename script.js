@@ -4,6 +4,22 @@ $('.new-idea-section').on('click', upvoteIdea);
 $('.new-idea-section').on('click', downvoteIdea);
 $('.title-input').on('keyup', enableSave);
 $('.idea-input').on('keyup', enableSave);
+$('.new-idea-section').on('focusout', editBody);
+$('.new-idea-section').on('keydown', function (event) {
+  if (event.keyCode == 13) {
+    event.preventDefault();
+    editBody(event);
+    $('.body').trigger('blur');
+  }
+});
+$('.new-idea-section').on('focusout', editIdea);
+$('.new-idea-section').on('keydown', function (event) {
+  if (event.keyCode == 13) {
+    event.preventDefault();
+    editIdea(event);
+    $('.idea').trigger('blur');
+  }
+});
 
 recallCards();
 
@@ -43,7 +59,6 @@ function createCard(event) {
   clearInputs();
 }
 
-
 function generateCard(id, title, body, quality) {
   return `<article class="new-idea" id="${id}">
             <article class="idea-header">
@@ -69,11 +84,11 @@ function upvoteIdea(event) {
   var id = $(event.target).parent().parent().attr('id');
   var element = $(event.target).siblings('.quality');
   var parsedIdea = JSON.parse(localStorage.getItem(id));
-  if ($(event.target).hasClass('upvote-btn') && element.text() === 'quality: swill') {
+  if (event.target.classList.contains('upvote-btn') && element.text() === 'quality: swill') {
    element.text('quality: plausible');
    parsedIdea.quality = 'plausible';
    setIdea(id, parsedIdea)
-  } else if ($(event.target).hasClass('upvote-btn') && element.text() === 'quality: plausible') {
+  } else if (event.target.classList.contains('upvote-btn') && element.text() === 'quality: plausible') {
     element.text('quality: genius');
    parsedIdea.quality = 'genius';
    setIdea(id, parsedIdea)
@@ -84,68 +99,46 @@ function downvoteIdea() {
    var id = $(event.target).parent().parent().attr('id');
    var element = $(event.target).siblings('.quality')
    var parsedIdea = JSON.parse(localStorage.getItem(id));
-  if ($(event.target).hasClass('downvote-btn') && element.text() === 'quality: genius') {
+  if (event.target.classList.contains('downvote-btn') && element.text() === 'quality: genius') {
    element.text('quality: plausible');
    parsedIdea.quality = 'plausible';
    setIdea(id, parsedIdea);
-  } else if ($(event.target).hasClass('downvote-btn') && element.text() === 'quality: plausible') {
+  } else if (event.target.classList.contains('downvote-btn') && element.text() === 'quality: plausible') {
    element.text('quality: swill');
    parsedIdea.quality = 'swill';
    setIdea(id, parsedIdea);
   }
 }
 
-  $('.body').on('focusout', editBody);
-  $('.body').on('keydown', function (event) {
-  if (event.keyCode == 13) {
-    event.preventDefault();
-    editBody(event);
-    $('.body').trigger('blur');
-  }
-});
-
-  $('.idea').on('focusout', editIdea);
-  $('.idea').on('keydown', function (event) {
-  if (event.keyCode == 13) {
-    event.preventDefault();
-    editIdea(event);
-    $('.idea').trigger('blur');
-  }
-});
-
 function editIdea(event) {
   event.preventDefault();
+  if ($(event.target).hasClass('idea')) {
   var id = $(event.target).parent().parent().attr('id');
   var parsedIdea = JSON.parse(localStorage.getItem(id));
   var changeTitle = event.target.innerText;
   parsedIdea.title = changeTitle;
   setIdea(id, parsedIdea);
+  }
 }
-
 
 function editBody(event) {
   event.preventDefault();
+  if ($(event.target).hasClass('body')) {
   var id = $(event.target).parent().attr('id');
   var parsedIdea = JSON.parse(localStorage.getItem(id));
   var changeBody = event.target.innerText;
   parsedIdea.body = changeBody;
   setIdea(id, parsedIdea);
+  } 
 }
 
 function deleteIdea(event) {
-  if ($(event.target).hasClass('delete-btn')) {
+  if (event.target.classList.contains('delete-btn')) {
     var id = $(event.target).parent().parent().attr('id');
     localStorage.removeItem(id);  
     $(event.target).parent().parent().remove();
   }
 }
-
-$(".search-bar").on("keyup", function() {
-  var searchValue = $(this).val().toLowerCase();
-  $(".new-idea").filter(function() {
-    $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1)
-  });
-});
 
 function recallCards() {
   for (var i = 0; i < localStorage.length; i++) {
