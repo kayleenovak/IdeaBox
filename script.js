@@ -2,6 +2,8 @@ $('.save-btn').on('click', createCard);
 $('.new-idea-section').on('click', deleteIdea);
 $('.new-idea-section').on('click', upvoteIdea);
 $('.new-idea-section').on('click', downvoteIdea);
+$('.title-input').on('keyup', enableSave);
+$('.idea-input').on('keyup', enableSave);
 
 recallCards();
 
@@ -21,6 +23,14 @@ function createIdea(title, body) {
 function setIdea(id, parsedIdea) {
   localStorage.setItem(id, JSON.stringify(parsedIdea))
 };
+
+function enableSave() {
+  if ($('.title-input').val() === '' || $('.idea-input').val() === '') {
+    $('.save-btn').prop('disabled', true);
+  } else {
+    $('.save-btn').prop('disabled', false);
+  }
+}
 
 function createCard(event) {
   event.preventDefault();
@@ -51,6 +61,7 @@ function generateCard(id, title, body, quality) {
 function clearInputs() {
   $('.title-input').val('');
   $('.idea-input').val('');
+  $('.save-btn').prop('disabled', true);
 }
 
 function upvoteIdea(event) {
