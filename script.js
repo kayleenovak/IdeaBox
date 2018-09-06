@@ -3,9 +3,55 @@ $('.new-idea-section').on('click', deleteIdea);
 $('.new-idea-section').on('click', upvoteIdea);
 $('.new-idea-section').on('click', downvoteIdea);
 
-
-
 recallCards();
+
+function NewIdea(title, body) {
+  this.id = $.now();
+  this.title = title;
+  this.body = body;
+  this.quality = 'swill';
+}
+
+function createIdea(title, body) {
+  var newIdea = new NewIdea(title, body);
+  setIdea(newIdea.id, newIdea); 
+  return newIdea;
+}
+  
+function setIdea(id, parsedIdea) {
+  localStorage.setItem(id, JSON.stringify(parsedIdea))
+};
+
+function createCard(event) {
+  event.preventDefault();
+  var titleInput = $('.title-input').val();
+  var ideaInput = $('.idea-input').val();
+  var newIdea = createIdea(titleInput, ideaInput);
+  $('.new-idea-card').prepend(
+    generateCard(newIdea.id, titleInput, ideaInput, newIdea.quality)
+  );
+  clearInputs();
+}
+
+function generateCard(id, title, body, quality) {
+  return `<article class="new-idea" id="${id}">
+            <article class="idea-header">
+              <h2 class="idea" contenteditable="true">${title}</h2>
+              <button class="delete-btn"></button>
+            </article>
+            <p class="body" contenteditable="true">${body}</p>
+            <div class="quality-btn">
+              <button class="upvote-btn"></button>
+              <button class="downvote-btn"></button>
+              <p class="quality">quality: ${quality}</p>
+            </div>
+          </article>`;
+}
+
+function clearInputs() {
+  $('.title-input').val('');
+  $('.idea-input').val('');
+}
 
 function upvoteIdea(event) {
   var id = $(event.target).parent().parent().attr('id');
@@ -20,7 +66,6 @@ function upvoteIdea(event) {
    parsedIdea.quality = 'genius';
    setIdea(id, parsedIdea)
   }
-
 }
 
 function downvoteIdea() {
@@ -46,7 +91,9 @@ $('.idea').on('keydown', function (event) {
     $('.idea').trigger('blur');
   }
 });
+
 function editIdea(event) {
+  event.preventDefault();
   var id = $(event.target).parent().parent().attr('id');
   var parsedIdea = JSON.parse(localStorage.getItem(id));
   var changeTitle = event.target.innerText;
@@ -63,48 +110,13 @@ $('.body').on('keydown', function (event) {
   }
 });
 
-
 function editBody(event) {
+  event.preventDefault();
   var id = $(event.target).parent().attr('id');
   var parsedIdea = JSON.parse(localStorage.getItem(id));
   var changeBody = event.target.innerText;
   parsedIdea.body = changeBody;
   setIdea(id, parsedIdea);
-}
-
-function setIdea(id, parsedIdea) {
-  localStorage.setItem(id, JSON.stringify(parsedIdea))
-}
-
-function generateCard(id, title, body, quality) {
-  return `<article class="new-idea" id="${id}">
-            <article class="idea-header">
-              <h2 class="idea" contenteditable="true">${title}</h2>
-              <button class="delete-btn"></button>
-            </article>
-            <p class="body" contenteditable="true">${body}</p>
-            <div class="quality-btn">
-            <button class="upvote-btn"></button>
-            <button class="downvote-btn"></button>
-            <p class="quality">quality: ${quality}</p>
-            </div>
-          </article>`;
-}
-
-function createCard(event) {
-  event.preventDefault();
-  var titleInput = $('.title-input').val();
-  var ideaInput = $('.idea-input').val();
-  var newIdea = createIdea(titleInput, ideaInput);
-  $('.new-idea-card').prepend(
-    generateCard(newIdea.id, titleInput, ideaInput, newIdea.quality)
-  );
-  clearInputs();
-}
-
-function clearInputs() {
-  $('.title-input').val('');
-  $('.idea-input').val('');
 }
 
 function deleteIdea(event) {
@@ -114,21 +126,6 @@ function deleteIdea(event) {
     $(event.target).parent().parent().remove();
   }
 }
-
-function NewIdea(title, body) {
-  this.id = $.now();
-  this.title = title;
-  this.body = body;
-  this.quality = 'swill';
-}
-
-function createIdea(title, body) {
-  var newIdea = new NewIdea(title, body);
-  var stringifiedIdea = JSON.stringify(newIdea);
-  localStorage.setItem(newIdea.id, stringifiedIdea); 
-  return newIdea
-  
-};
 
 function recallCards() {
   for (var i = 0; i < localStorage.length; i++) {
