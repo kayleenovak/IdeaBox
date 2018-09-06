@@ -15,10 +15,10 @@ button {
 }
 
 .delete-btn {
-  height: 22px;
-  width: 22px;
   background: url('images/delete.svg');
   background-repeat: no-repeat;
+  height: 22px;
+  width: 22px;
 }
 
 .delete-btn:hover {
@@ -27,11 +27,11 @@ button {
 }
 
 .downvote-btn {
-  height: 22px;
-  width: 22px;
   background: url('images/downvote.svg');
   background-repeat: no-repeat;
+  height: 22px;
   margin-right: 5px;
+  width: 22px;
 }
 
 .downvote-btn:hover {
@@ -54,10 +54,10 @@ h1 {
 }
 
 .idea {
-    display: inline-block;
-    margin: 0;
-    font-size: 20px;
     color: #606E71;
+    display: inline-block;
+    font-size: 20px;
+    margin: 0;
 }
 
 .idea-header {
@@ -66,10 +66,10 @@ h1 {
 }
 
 .input-area {
+  align-items: center;
   background: #E5F3F2;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 input,
@@ -87,10 +87,10 @@ textarea {
 
 
 .new-idea {
-  width: 90%;
   border-bottom: 2px solid #D1D3D4;
-  padding-bottom: 5px;
   margin-top: 15px;
+  padding-bottom: 5px;
+  width: 90%;
 }
 
 p {
@@ -99,28 +99,28 @@ p {
 }
 
 .quality {
+  color: #6D6E71;
   display: inline;
   margin-left: 5px;
-  color: #6D6E71;
 }
 
 .quality-btn {
-  display: flex;
   align-items: center;
+  display: flex;
 }
 
 .save-btn {
-  padding: 5px;
   color: white;
   background-color: #00A79D;
+  padding: 5px;
 }
 
 .search-bar {
+    border: 1px solid #D1D3D4;
+    color: #939598;
     font-size: 16px;
     margin: 15px 0;
     width: 90%;
-    color: #939598;
-    border: 1px solid #D1D3D4;
 }
 
 .search-bar::placeholder {
@@ -139,8 +139,8 @@ span {
 
 .title-input,
 .idea-input {
-  color: #939598;
   border: 1px solid #D1D3D4;
+  color: #939598;
 }
 
 .title-input::placeholder,
@@ -151,16 +151,16 @@ span {
 .title-input,
 .idea-input,
 .save-btn {
-    margin-bottom: 15px;
     font-size: 16px;
+    margin-bottom: 15px;
 }
 
 .upvote-btn {
-  height: 22px;
-  width: 22px;
   background: url('images/upvote.svg');
   background-repeat: no-repeat;
+  height: 22px;
   margin-right: 5px;
+  width: 22px;
 }
 
 .upvote-btn:hover {
@@ -174,8 +174,8 @@ span {
   form,
   .search-bar,
   .new-idea-card {
-    width: 75%;
     max-width: 460px;
+    width: 75%;
   }
 
   .new-idea {
@@ -212,8 +212,8 @@ span {
   form,
   .search-bar,
   .new-idea-card {
-    width: 55%;
     max-width: 550px;
+    width: 55%;
   }
 
   h1 {
