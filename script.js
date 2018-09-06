@@ -4,6 +4,7 @@ $('.new-idea-section').on('click', upvoteIdea);
 $('.new-idea-section').on('click', downvoteIdea);
 $('.title-input').on('keyup', enableSave);
 $('.idea-input').on('keyup', enableSave);
+$(".search-bar").on("keyup", search);
 $('.new-idea-section').on('focusout', editBody);
 $('.new-idea-section').on('keydown', function (event) {
   if (event.keyCode == 13) {
@@ -146,4 +147,12 @@ function recallCards() {
     var html = generateCard(parsedIdea.id, parsedIdea.title, parsedIdea.body, parsedIdea.quality);
     $('.new-idea-card').prepend(html);
   }
+}
+
+
+function search() {
+ var searchValue = $(this).val().toLowerCase();
+ $(".new-idea").filter(function() {
+   $(this).toggle($(this).text().toLowerCase().indexOf(searchValue) > -1)
+ });
 }
