@@ -25,11 +25,12 @@ function NewIdea(title, body) {
 
 function createIdea(title, body) {
   var newIdea = new NewIdea(title, body);
-  setIdea(newIdea.id, newIdea); 
+  newIdea.id = newIdea.id.toString();
+  setIdea(newIdea); 
   return newIdea;
 }
   
-function setIdea(id, parsedIdea) {
+function setIdea(parsedIdea) {
   var parsedIdeas = JSON.parse(localStorage.getItem('idea-box-ideas'));
   if (parsedIdeas && parsedIdeas.length) {
     localStorage.setItem('idea-box-ideas', JSON.stringify([...parsedIdeas, parsedIdea]))
@@ -95,11 +96,11 @@ function upvoteIdea(e) {
   if (element.text() === 'quality: swill') {
    element.text('quality: plausible');
    parsedIdea.quality = 'plausible';
-   setIdea(id, parsedIdea)
+   setIdea(parsedIdea)
   } else if (element.text() === 'quality: plausible') {
     element.text('quality: genius');
     parsedIdea.quality = 'genius';
-    setIdea(id, parsedIdea)
+    setIdea(parsedIdea)
   }
 }
 
@@ -110,11 +111,11 @@ function downvoteIdea() {
   if (element.text() === 'quality: genius') {
    element.text('quality: plausible');
    parsedIdea.quality = 'plausible';
-   setIdea(id, parsedIdea);
+   setIdea(parsedIdea);
   } else if (element.text() === 'quality: plausible') {
    element.text('quality: swill');
    parsedIdea.quality = 'swill';
-   setIdea(id, parsedIdea);
+   setIdea(parsedIdea);
   }
 }
 
@@ -125,7 +126,7 @@ function editIdea(e, ideaProperty) {
     var parsedIdea = JSON.parse(localStorage.getItem(id));
     var changedProperty = e.target.innerText;
     parsedIdea[ideaProperty] = changedProperty;
-    setIdea(id, parsedIdea);
+    setIdea(parsedIdea);
   }
 }
 
@@ -136,13 +137,17 @@ function editBody(e) {
     var parsedIdea = JSON.parse(localStorage.getItem(id));
     var changeBody = e.target.innerText;
     parsedIdea.body = changeBody;
-    setIdea(id, parsedIdea);
+    setIdea(parsedIdea);
   } 
 }
 
 function deleteIdea(e) {
   var id = $(e.target).parent().parent().attr('id');
-  localStorage.removeItem(id);  
+  var parsedIdeas = JSON.parse(localStorage.getItem('idea-box-ideas'));
+  var remainingIdeas = parsedIdeas.filter(idea => {
+    return idea.id !== id;
+  });
+  localStorage.setItem('idea-box-ideas', JSON.stringify(remainingIdeas));
   $(e.target).parent().parent().remove();
 }
 
